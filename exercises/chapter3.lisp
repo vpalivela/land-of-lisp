@@ -1,5 +1,5 @@
 ;; Loads
-(load "lisp-unit/lisp-unit.lisp")
+(load "../lisp-unit/lisp-unit.lisp")
 (use-package :lisp-unit)
 
 ;; steal-emerald: list -> string

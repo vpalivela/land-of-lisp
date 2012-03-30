@@ -2,4 +2,5 @@
 *.fas
 *.swp
 *.DS_Store
+*.lisp~
 
