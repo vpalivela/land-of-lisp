@@ -2,6 +2,9 @@
 (load "../lisp-unit/lisp-unit.lisp")
 (use-package :lisp-unit)
 
+;; Mancala Kata
+
+
 (defparameter *board* 
     '(
         (1 ((1 4) (2 4) (3 4) (4 4) (5 4) (6 4) (7 0)))
@@ -70,24 +73,45 @@
 
 (defun next-player (pIndex)
     (cond
-        ((eq pIndex 0) (+ pIndex 1))
-        ((eq pIndex 1) (- pIndex 1))
+        ((eq pIndex 0) 1)
+        ((eq pIndex 1) 1)
     )
 )
 
 (defun sow-well (pIndex well)
     (dotimes (n (seeds-in-well pIndex well))
-        (if (>= *goal-well* (+ well n 1))
-            (increment-well pIndex (+ well n 1) 1)
-            (increment-well (next-player pIndex) (- (+ well n ) *goal-well*) 1)
+        (cond
+            ((>= *goal-well* (+ well n 1)) (increment-well pIndex (+ well n 1) 1))
+            ((>= -2 (- well n)) (increment-well pIndex (- n *goal-well* 1) 1))
+            (t (increment-well (next-player pIndex) (- (+ well n ) *goal-well*) 1))
         )
+        (decrement-well pIndex well 1)
     )
-    (set-well pIndex well 0)
+    (print (seeds-in-well pIndex well))
 )
 
 
 
 ;; Tests:
+
+;; The opponent's goal well is NOT included in the sowing process.
+(define-test spec-2.5-when-a-player-sows-a-well-then-the-opponents-goal-well-is-NOT-included-in-the-sowing-process
+    (dotimes (player 1)
+        (start-game)
+        (increment-well player *well-6* 4)
+        ;;(print-board)
+        (sow-well player *well-6*)
+        ;;(print (list (list player '(1 4))))
+        (assert-equal 
+            '(
+                (1 ((1 5) (2 4) (3 4) (4 4) (5 4) (6 0) (7 1)))
+                (2 ((1 5) (2 5) (3 5) (4 5) (5 5) (6 5) (7 0)))
+            )
+            *board*
+        )
+        ;;(print-board)
+    )
+)
 
 (define-test spec-2.4-when-a-player-sows-a-well-then-the-opponents-wells-are-also-included-in-the-sowing-process
     (dotimes (player 2)
