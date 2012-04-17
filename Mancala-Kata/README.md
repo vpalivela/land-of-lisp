@@ -1,9 +1,7 @@
 ##Basic Mancala
 
-1. Mancala is a two player game where each person takes turns "sowing" seeds from well to well.
-Here is an example of a mancala playing field: 
+1. Mancala is a two player game where each person takes turns "sowing" seeds from well to well. Two people playing Mancala: [video]
 <img src="http://i.imgur.com/OBn8Y.png" />
-Two people playing Mancala: [video]
 
 2. Each player has 6 wells and a well that is considered a goal, each well starts off with 4 seeds.  Goal wells do not have any seeds.
 
@@ -12,7 +10,6 @@ picking up all seeds from the source well and dropping one seed into each well a
 The player's goal well is included in the sowing process.  
 The opponent's wells are also included in the sowing processes.  
 The opponent's goal well is NOT included in the sowing process.
-(here is the image link again: http://i.imgur.com/OBn8Y.png)
 
 4. The game ends when any one player has no seeds to sow from his wells on his turn (players cannot sow from their goal well).
 
